@@ -52,7 +52,12 @@ module JsendWrapper
       require 'jsend_wrapper/rails/render_option'
 
       ActionController::Renderers.add :jsend do |value, _|
-        self.content_type ||= Mime::JSON
+        self.content_type ||= if ::Rails::VERSION::MAJOR >= 6
+                                Mime[:json]
+                              else
+                                Mime::JSON
+                              end
+
         RenderOption.new(value).render
       end
     end
