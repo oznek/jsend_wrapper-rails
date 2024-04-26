@@ -6,7 +6,7 @@ end
 
 group :development do
   gem 'yard', '~> 0.8'
-  gem 'bundler', '~> 1.0'
+  gem 'bundler', '~> 2.0'
   gem 'jeweler', '~> 2.0'
   gem 'guard-rspec', '~> 4.2', require: false
 end
@@ -14,5 +14,5 @@ end
 group :test do
   gem 'rspec', '~> 3.0', require: false
   gem 'simplecov', '~> 0.7', require: false
-  gem 'factory_girl', '~> 4.4'
+  gem 'factory_bot', '~> 6.4'
 end
