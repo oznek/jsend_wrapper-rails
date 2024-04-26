@@ -16,9 +16,18 @@
 module JsendWrapper
   module Rails
     class TemplateHandler
+      # For Rails < 6
       def self.call(template)
+        call(template, nil)
+      end
+
+      def self.call(template, source)
         json_handler = ActionView::Template.registered_template_handler :jbuilder
-        json = json_handler.call template
+        json = if ::Rails::VERSION::MAJOR >= 6
+                 json_handler.call template, source
+               else
+                 json_handler.call template
+               end
 
         <<-RUBY
           content = instance_eval #{json.inspect}
